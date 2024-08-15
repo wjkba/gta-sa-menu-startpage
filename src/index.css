@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'BankGothic'; /* Name your font family */
+  src: url('./fonts/BankGothicMediumBT.ttf'); /* Locate the .ttf file within your directory*/
+}
+
+.font-bankGothic{
+  font-family: "BankGothic"
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
