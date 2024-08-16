@@ -1,28 +1,17 @@
-import { ReactNode } from "preact/compat";
-
-interface ButtonProps {
-  children: ReactNode;
-  link: string;
-  active: boolean;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  text: string;
+  active?: boolean;
 }
 
-export default function Button({ children, active, link }: ButtonProps) {
-  function openWebsite() {
-    window.location.href = link;
-  }
-
-  function handleButtonClick() {
-    openWebsite();
-  }
-
+export default function Button({ text, active = false, ...rest }: ButtonProps) {
   return (
     <button
-      onClick={handleButtonClick}
+      {...rest}
       class={`${
         active ? "text-[#a8c3e7]" : "text-[#4b5b6a]"
-      } hover:text-[#a8c3e7] text-left  font-bankGothic text-4xl font-medium`}
+      } hover:text-[#a8c3e7] text-left  font-bankGothic text-3xl font-medium`}
     >
-      {children}
+      {text}
     </button>
   );
 }
