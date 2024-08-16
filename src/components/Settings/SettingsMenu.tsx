@@ -1,7 +1,10 @@
-import { useState } from "preact/hooks";
 import Button from "../Button";
 import AddWebsiteForm from "./AddWebsiteForm";
 import RemoveWebsiteList from "./RemoveWebsiteList";
+
+//TODO: sound effects toggle
+//TODO: background fix & change background
+//TODO: layout options
 
 interface SettingsMenuProps {
   toggleSettings: () => void;
