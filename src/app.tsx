@@ -26,9 +26,8 @@ export function App() {
   return (
     <div class={"flex justify-center items-center bg-black h-screen w-full"}>
       <div class={"bg-black relative w-full max-w-[1300px] h-screen"}>
-        <main>
+        <main class={"select-none"}>
           <img class={"absolute z-0"} src={BG1} />
-          <div class={"min-h-[20vh] relative z-1 w-full "}></div>
 
           {!showSettings ? (
             <LinkMenu sites={websites} toggleSettings={toggleSettings} />

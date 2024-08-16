@@ -3,8 +3,16 @@
   src: url('./fonts/BankGothicMediumBT.ttf'); /* Locate the .ttf file within your directory*/
 }
 
+@font-face {
+  font-family: 'Beckett'; /* Name your font family */
+  src: url('./fonts/Beckett.ttf'); /* Locate the .ttf file within your directory*/
+}
+
 .font-bankGothic{
   font-family: "BankGothic"
+}
+.font-beckett{
+  font-family: "Beckett"
 }
 
 @tailwind base;

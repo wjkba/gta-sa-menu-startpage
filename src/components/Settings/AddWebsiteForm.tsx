@@ -9,21 +9,20 @@ export default function AddWebsiteForm() {
 
   async function handleFormSubmit(event: Event) {
     event.preventDefault();
-    console.log(nameRef.current?.value, linkRef.current?.value);
-    try {
-      if (nameRef.current && linkRef.current) {
-        if (
-          nameRef.current.value.length > 1 &&
-          linkRef.current.value.length > 1
-        ) {
-          const result = await db.websites.add({
-            name: nameRef.current.value,
-            link: linkRef.current.value,
-          });
 
-          setMessage("website added successfully");
-        } else throw new Error("Wrong input");
-      } else throw new Error("Wrong input");
+    const name = nameRef.current?.value;
+    const link = linkRef.current?.value;
+
+    console.log(name, link);
+
+    if (!name || !link || name.length <= 1 || link.length <= 1) {
+      setMessage("Wrong input");
+      return;
+    }
+
+    try {
+      await db.websites.add({ name, link });
+      setMessage("Website added successfully");
     } catch (error) {
       if (error instanceof Error) {
         console.error(error);
@@ -37,17 +36,20 @@ export default function AddWebsiteForm() {
 
   return (
     <form onSubmit={handleFormSubmit} class={"max-w-[600px]"}>
-      <input
-        ref={nameRef}
-        class={`mb-2 text-white outline-none bg-neutral-800 p-2 text-left font-bankGothic text-2xl font-medium w-full`}
-        placeholder={"website name"}
-      />
-      <input
-        ref={linkRef}
-        class={`mb-2 text-white outline-none bg-neutral-800 p-2 text-left font-bankGothic text-2xl font-medium w-full`}
-        placeholder={"link"}
-      />
-      {message && <p class={"text-yellow-300"}>{message}</p>}
+      <div class={"mb-2"}>
+        <input
+          ref={nameRef}
+          class={`mb-2 text-white outline-none bg-neutral-800 p-2 text-left font-bankGothic text-2xl font-medium w-full`}
+          placeholder={"website name"}
+        />
+        <input
+          ref={linkRef}
+          class={`mb-2 text-white outline-none bg-neutral-800 p-2 text-left font-bankGothic text-2xl font-medium w-full`}
+          placeholder={"link"}
+        />
+        {message && <p class={"text-yellow-300"}>{message}</p>}
+      </div>
+
       <Button type={"submit"} text="Add" />
     </form>
   );
