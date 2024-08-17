@@ -1,12 +1,12 @@
 import Dexie, { EntityTable } from "dexie";
 
 const initWebsites = [
-  { name: "NOTION", link: "https://www.notion.so" },
-  { name: "CODEWARS", link: "https://www.codewars.com" },
   { name: "GITHUB", link: "https://www.github.com" },
-  { name: "YOUTUBE", link: "https://www.youtube.com" },
-  { name: "MDN", link: "https://developer.mozilla.org" },
   { name: "DISCORD", link: "https://www.discord.com" },
+  { name: "NOTION", link: "https://www.notion.so" },
+  { name: "MDN", link: "https://developer.mozilla.org" },
+  { name: "CODEWARS", link: "https://www.codewars.com" },
+  { name: "YOUTUBE", link: "https://www.youtube.com" },
 ];
 
 interface Website {

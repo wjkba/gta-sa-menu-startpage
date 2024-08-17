@@ -24,7 +24,7 @@ export function App() {
   }
 
   return (
-    <div class={"flex justify-center items-center bg-pink-300 h-screen w-full"}>
+    <div class={"bg-black flex justify-center items-center h-screen w-full"}>
       <div class={"bg-black relative w-full max-w-[1600px] h-screen"}>
         <main class={"select-none"}>
           <img class={"absolute z-0"} src={BG1} />

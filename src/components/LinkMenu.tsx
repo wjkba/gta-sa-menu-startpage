@@ -66,7 +66,7 @@ export default function LinkMenu({ sites, toggleSettings }: LinkMenuProps) {
   }
 
   return (
-    <div class={"z-1 relative flex flex-col gap-2 p-12 w-full"}>
+    <div class={"max-w-[600px] z-1 relative flex flex-col gap-2 p-12 "}>
       {sites.map((site, index) => (
         <ButtonWebsite link={site.link} active={index === activeButton}>
           {site.name}

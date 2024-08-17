@@ -10,8 +10,8 @@ export default function AddWebsiteForm() {
   async function handleFormSubmit(event: Event) {
     event.preventDefault();
 
-    const name = nameRef.current?.value;
-    const link = linkRef.current?.value;
+    const name = nameRef.current?.value.toUpperCase();
+    const link = linkRef.current?.value.toUpperCase();
 
     console.log(name, link);
 

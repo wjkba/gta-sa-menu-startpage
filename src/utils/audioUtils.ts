@@ -1,7 +1,6 @@
 import selectSFX from "../audio/select.mp3";
 import enterSFX from "../audio/enter.mp3";
 import backSFX from "../audio/back.mp3";
-import { act } from "preact/test-utils";
 
 export function playSound(soundName: string) {
   let audio;
