@@ -1,4 +1,5 @@
 import { ReactNode } from "preact/compat";
+import { playSoundDelay } from "../utils/audioUtils";
 
 interface ButtonWebsiteProps {
   children: ReactNode;
@@ -16,7 +17,11 @@ export default function ButtonWebsite({
   }
 
   function handleButtonClick() {
-    openWebsite();
+    if (localStorage.getItem("soundEnabled") === "false") {
+      openWebsite();
+    } else {
+      playSoundDelay("enter", openWebsite);
+    }
   }
 
   return (

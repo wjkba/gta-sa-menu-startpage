@@ -1,6 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import selectSFX from "../audio/select.mp3";
-import enterSFX from "../audio/enter.mp3";
+import { playSound } from "../utils/audioUtils";
 import { Website } from "../db";
 import ButtonWebsite from "./ButtonWebsite";
 import Button from "./Button";
@@ -12,20 +11,19 @@ interface LinkMenuProps {
 
 export default function LinkMenu({ sites, toggleSettings }: LinkMenuProps) {
   const [activeButton, setActiveButton] = useState<number>(0);
-  const selectSound = new Audio(selectSFX);
-  const enterSound = new Audio(enterSFX);
+  const soundEnabled = localStorage.getItem("soundEnabled") !== "false";
 
   useEffect(() => {
     function handleJ() {
-      selectSound.play();
+      if (soundEnabled) playSound("select");
       goDown();
     }
     function handleK() {
-      selectSound.play();
+      if (soundEnabled) playSound("select");
       goUp();
     }
     function handleEnter() {
-      enterSound.play();
+      if (soundEnabled) playSound("enter");
       setTimeout(() => {
         if (activeButton <= sites.length - 1) {
           window.location.href = sites[activeButton].link;
@@ -37,6 +35,7 @@ export default function LinkMenu({ sites, toggleSettings }: LinkMenuProps) {
     }
 
     const handleKey = (event: KeyboardEvent) => {
+      //TODO: arrow navigation, left right column jump
       switch (event.key) {
         case "j":
           handleJ();
@@ -75,7 +74,7 @@ export default function LinkMenu({ sites, toggleSettings }: LinkMenuProps) {
       ))}
       <Button
         text="SETTINGS"
-        onClick={toggleSettings}
+        click={toggleSettings}
         active={sites.length === activeButton}
       />
     </div>

@@ -1,6 +1,8 @@
+import { useState } from "preact/hooks";
 import Button from "../Button";
 import AddWebsiteForm from "./AddWebsiteForm";
 import RemoveWebsiteList from "./RemoveWebsiteList";
+import { playSound } from "../../utils/audioUtils";
 
 //TODO: sound effects toggle
 //TODO: background fix & change background
@@ -11,19 +13,39 @@ interface SettingsMenuProps {
 }
 
 export default function SettingsMenu({ toggleSettings }: SettingsMenuProps) {
+  const [soundEnabled, setSoundEnabled] = useState(
+    localStorage.getItem("soundEnabled") !== "false"
+  );
+
   function handleBack() {
     toggleSettings();
     window.location.reload();
   }
 
+  function handleSoundToggle() {
+    if (
+      localStorage.getItem("soundEnabled") === null ||
+      localStorage.getItem("soundEnabled") === "true"
+    ) {
+      localStorage.setItem("soundEnabled", "false");
+      setSoundEnabled(false);
+    } else {
+      localStorage.setItem("soundEnabled", "true");
+      setSoundEnabled(true);
+    }
+  }
+
   return (
     <div class={"z-1 relative grid gap-12 p-12 w-full"}>
-      {/* <section>
+      <section>
         <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
           Sound Effects
         </h1>
-        <Button text="TODO" />
-      </section> */}
+        <Button
+          click={handleSoundToggle}
+          text={localStorage.getItem("soundEnabled") === "false" ? "OFF" : "ON"}
+        />
+      </section>
       <section>
         <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
           Add new website
@@ -37,7 +59,7 @@ export default function SettingsMenu({ toggleSettings }: SettingsMenuProps) {
         </h1>
         <RemoveWebsiteList />
       </section>
-      <Button onClick={handleBack} text="BACK" active={false} />
+      <Button click={handleBack} text="BACK" sound="back" active={false} />
     </div>
   );
 }

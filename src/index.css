@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'BankGothic'; /* Name your font family */
+  font-family: 'Bank Gothic'; /* Name your font family */
   src: url('./fonts/BankGothicMediumBT.ttf'); /* Locate the .ttf file within your directory*/
 }
 
@@ -8,11 +8,20 @@
   src: url('./fonts/Beckett.ttf'); /* Locate the .ttf file within your directory*/
 }
 
+@font-face {
+  font-family: 'Futura LT Bold';
+  src: url('./fonts/FuturaLT-Bold.woff') format('woff');
+  }
+  
+
 .font-bankGothic{
-  font-family: "BankGothic"
+  font-family: "Bank Gothic"
 }
 .font-beckett{
   font-family: "Beckett"
+}
+.font-futura{
+  font-family: "Futura LT Bold"
 }
 
 @tailwind base;
