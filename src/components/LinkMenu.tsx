@@ -7,9 +7,14 @@ import Button from "./Button";
 interface LinkMenuProps {
   sites: Website[] | [];
   toggleSettings: () => void;
+  isSearchBarActive: boolean;
 }
 
-export default function LinkMenu({ sites, toggleSettings }: LinkMenuProps) {
+export default function LinkMenu({
+  sites,
+  toggleSettings,
+  isSearchBarActive,
+}: LinkMenuProps) {
   const [activeButton, setActiveButton] = useState<number>(0);
   const soundEnabled = localStorage.getItem("soundEnabled") !== "false";
 
@@ -34,7 +39,9 @@ export default function LinkMenu({ sites, toggleSettings }: LinkMenuProps) {
       }, 200);
     }
 
-    const handleKey = (event: KeyboardEvent) => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (isSearchBarActive) return;
+
       //TODO: left right column jump
       switch (event.key) {
         case "j":
@@ -54,12 +61,14 @@ export default function LinkMenu({ sites, toggleSettings }: LinkMenuProps) {
           break;
       }
     };
-    window.addEventListener("keydown", handleKey);
+    window.addEventListener("keydown", handleKeyPress);
 
     return () => {
-      window.removeEventListener("keydown", handleKey);
+      window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [activeButton, sites]);
+  }, [activeButton, sites, isSearchBarActive]);
+
+  // TODO: active based on tab, movement keys act as tab
 
   function goUp() {
     setActiveButton((a) => (a > 0 ? a - 1 : sites.length));
@@ -70,7 +79,7 @@ export default function LinkMenu({ sites, toggleSettings }: LinkMenuProps) {
   }
 
   return (
-    <div class={"max-w-[600px] z-1 relative flex flex-col gap-2 p-12 "}>
+    <div class={"flex flex-col gap-2 "}>
       {sites.map((site, index) => (
         <ButtonWebsite link={site.link} active={index === activeButton}>
           {site.name}
