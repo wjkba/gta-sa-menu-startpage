@@ -1,16 +1,19 @@
 @font-face {
-  font-family: 'Bank Gothic'; /* Name your font family */
-  src: url('./fonts/BankGothicMediumBT.ttf'); /* Locate the .ttf file within your directory*/
+  font-family: 'Bank Gothic'; 
+  src: url('./fonts/BankGothicMediumBT.ttf'); 
+  font-display: block;
 }
 
 @font-face {
-  font-family: 'Beckett'; /* Name your font family */
-  src: url('./fonts/Beckett.ttf'); /* Locate the .ttf file within your directory*/
+  font-family: 'Beckett'; 
+  src: url('./fonts/Beckett.ttf'); 
+  font-display: block;
 }
 
 @font-face {
   font-family: 'Futura LT Bold';
   src: url('./fonts/FuturaLT-Bold.woff') format('woff');
+  font-display: block;
   }
   
 

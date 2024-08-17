@@ -1,22 +1,19 @@
-import { useEffect, useState } from "preact/hooks";
-import { db, getDbArray, Website } from "../../db";
+import { db, Website } from "../../db";
 import Button from "../Button";
 
-export default function RemoveWebsiteList() {
-  const [sites, setSites] = useState<[] | Website[]>([]);
+interface RemoveWebsiteListProps {
+  sites: Website[];
+  refreshDatabase: () => void;
+}
 
-  useEffect(() => {
-    async function getWebsites() {
-      const fetchedArray = await getDbArray();
-      if (fetchedArray) setSites(fetchedArray);
-    }
-    getWebsites();
-  }, []);
-
+export default function RemoveWebsiteList({
+  sites,
+  refreshDatabase,
+}: RemoveWebsiteListProps) {
   async function handleDelete(site: Website) {
     try {
       await db.websites.delete(site.id);
-      setSites((sites) => sites.filter((website) => website.id !== site.id));
+      refreshDatabase();
     } catch (error) {
       console.error(error);
     }

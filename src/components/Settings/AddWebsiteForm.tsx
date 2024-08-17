@@ -2,7 +2,13 @@ import { useRef, useState } from "preact/hooks";
 import Button from "../Button";
 import { db } from "../../db";
 
-export default function AddWebsiteForm() {
+interface AddWebsiteFormProps {
+  refreshDatabase: () => void;
+}
+
+export default function AddWebsiteForm({
+  refreshDatabase,
+}: AddWebsiteFormProps) {
   const [message, setMessage] = useState<null | string>(null);
   const nameRef = useRef<HTMLInputElement | null>(null);
   const linkRef = useRef<HTMLInputElement | null>(null);
@@ -23,6 +29,7 @@ export default function AddWebsiteForm() {
     try {
       await db.websites.add({ name, link });
       setMessage("Website added successfully");
+      refreshDatabase();
     } catch (error) {
       if (error instanceof Error) {
         console.error(error);

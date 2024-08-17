@@ -1,24 +1,36 @@
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import Button from "../Button";
 import AddWebsiteForm from "./AddWebsiteForm";
 import RemoveWebsiteList from "./RemoveWebsiteList";
+import { type Website } from "../../db";
 
-//TODO: sound effects toggle
 //TODO: background fix & change background
 //TODO: layout options
 
 interface SettingsMenuProps {
   toggleSettings: () => void;
+  refreshDatabase: () => void;
+  sites: Website[];
 }
 
-export default function SettingsMenu({ toggleSettings }: SettingsMenuProps) {
+export default function SettingsMenu({
+  toggleSettings,
+  refreshDatabase,
+  sites,
+}: SettingsMenuProps) {
+  const [isReady, setIsReady] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(
     localStorage.getItem("soundEnabled") !== "false"
   );
 
+  useEffect(() => {
+    document.fonts.load("1em Beckett").then(() => setIsReady(true));
+  }, []);
+
   function handleBack() {
+    refreshDatabase();
     toggleSettings();
-    window.location.reload();
+    //window.location.reload();
   }
 
   function handleSoundToggle() {
@@ -34,28 +46,36 @@ export default function SettingsMenu({ toggleSettings }: SettingsMenuProps) {
     }
   }
 
-  return (
-    <div class={"max-w-[600px] z-1 relative grid gap-12 p-12"}>
-      <section>
-        <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
-          Sound Effects
-        </h1>
-        <Button click={handleSoundToggle} text={!soundEnabled ? "OFF" : "ON"} />
-      </section>
-      <section>
-        <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
-          Add new website
-        </h1>
-        <AddWebsiteForm />
-      </section>
+  if (isReady) {
+    return (
+      <div class={"max-w-[600px] z-1 relative grid gap-12 p-12"}>
+        <section>
+          <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
+            Add to List
+          </h1>
+          <AddWebsiteForm refreshDatabase={refreshDatabase} />
+        </section>
 
-      <section>
-        <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
-          Remove websites
-        </h1>
-        <RemoveWebsiteList />
-      </section>
-      <Button click={handleBack} text="BACK" sound="back" active={false} />
-    </div>
-  );
+        <section>
+          <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
+            Remove from List
+          </h1>
+          <RemoveWebsiteList sites={sites} refreshDatabase={refreshDatabase} />
+        </section>
+
+        <section>
+          <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
+            Sound Effects
+          </h1>
+          <Button
+            click={handleSoundToggle}
+            text={!soundEnabled ? "OFF" : "ON"}
+          />
+        </section>
+        <Button click={handleBack} text="BACK" sound="back" active={false} />
+      </div>
+    );
+  }
+
+  return <></>;
 }

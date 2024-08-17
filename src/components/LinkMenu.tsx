@@ -14,11 +14,11 @@ export default function LinkMenu({ sites, toggleSettings }: LinkMenuProps) {
   const soundEnabled = localStorage.getItem("soundEnabled") !== "false";
 
   useEffect(() => {
-    function handleJ() {
+    function handleDown() {
       if (soundEnabled) playSound("select");
       goDown();
     }
-    function handleK() {
+    function handleUp() {
       if (soundEnabled) playSound("select");
       goUp();
     }
@@ -35,13 +35,17 @@ export default function LinkMenu({ sites, toggleSettings }: LinkMenuProps) {
     }
 
     const handleKey = (event: KeyboardEvent) => {
-      //TODO: arrow navigation, left right column jump
+      //TODO: left right column jump
       switch (event.key) {
         case "j":
-          handleJ();
+        case "ArrowDown":
+        case "s":
+          handleDown();
           break;
         case "k":
-          handleK();
+        case "ArrowUp":
+        case "w":
+          handleUp();
           break;
         case "Enter":
           handleEnter();

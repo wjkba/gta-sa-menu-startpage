@@ -10,12 +10,13 @@ export function App() {
   const [websites, setWebsites] = useState<Website[]>([]);
   const [showSettings, setShowSettings] = useState(false);
 
+  async function loadDatabaseWebsites() {
+    await initDb();
+    const dbArray = await getDbArray();
+    if (dbArray) setWebsites(dbArray);
+  }
+
   useEffect(() => {
-    async function loadDatabaseWebsites() {
-      await initDb();
-      const dbArray = await getDbArray();
-      if (dbArray) setWebsites(dbArray);
-    }
     loadDatabaseWebsites();
   }, []);
 
@@ -32,7 +33,11 @@ export function App() {
           {!showSettings ? (
             <LinkMenu sites={websites} toggleSettings={toggleSettings} />
           ) : (
-            <SettingsMenu toggleSettings={toggleSettings} />
+            <SettingsMenu
+              sites={websites}
+              refreshDatabase={loadDatabaseWebsites}
+              toggleSettings={toggleSettings}
+            />
           )}
         </main>
       </div>
