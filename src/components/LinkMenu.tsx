@@ -79,17 +79,19 @@ export default function LinkMenu({
   }
 
   return (
-    <div class={"flex flex-col gap-2 "}>
-      {sites.map((site, index) => (
-        <ButtonWebsite link={site.link} active={index === activeButton}>
-          {site.name}
-        </ButtonWebsite>
-      ))}
+    <>
+      <div class={"flex flex-col gap-2 mb-6 "}>
+        {sites.map((site, index) => (
+          <ButtonWebsite link={site.link} active={index === activeButton}>
+            {site.name}
+          </ButtonWebsite>
+        ))}
+      </div>
       <Button
         text="SETTINGS"
         click={toggleSettings}
         active={sites.length === activeButton}
       />
-    </div>
+    </>
   );
 }

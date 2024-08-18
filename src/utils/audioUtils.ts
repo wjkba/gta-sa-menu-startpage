@@ -1,6 +1,6 @@
-import selectSFX from "../audio/select.mp3";
-import enterSFX from "../audio/enter.mp3";
-import backSFX from "../audio/back.mp3";
+import selectSFX from "../assets/audio/select.mp3";
+import enterSFX from "../assets/audio/enter.mp3";
+import backSFX from "../assets/audio/back.mp3";
 
 export function playSound(soundName: string) {
   let audio;

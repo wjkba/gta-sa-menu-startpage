@@ -3,6 +3,7 @@ import Button from "../Button";
 import AddWebsiteForm from "./AddWebsiteForm";
 import RemoveWebsiteList from "./RemoveWebsiteList";
 import { type Website } from "../../db";
+import BackgroundChange from "./BackgroundChange";
 
 //TODO: background fix & change background
 //TODO: layout options
@@ -11,12 +12,16 @@ interface SettingsMenuProps {
   toggleSettings: () => void;
   refreshDatabase: () => void;
   sites: Website[];
+  currentBackground: string;
+  setCurrentBackground: (bgX: string) => void;
 }
 
 export default function SettingsMenu({
   toggleSettings,
   refreshDatabase,
   sites,
+  currentBackground,
+  setCurrentBackground,
 }: SettingsMenuProps) {
   const [isReady, setIsReady] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(
@@ -48,32 +53,52 @@ export default function SettingsMenu({
 
   if (isReady) {
     return (
-      <div class={"max-w-[600px] z-1 relative grid gap-12 p-12"}>
-        <section>
-          <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
-            Add to List
-          </h1>
-          <AddWebsiteForm refreshDatabase={refreshDatabase} />
-        </section>
+      <>
+        <div
+          class={
+            "max-h-[65vh] overflow-auto z-1 relative grid gap-12 mb-8 pr-16"
+          }
+        >
+          <section>
+            <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
+              Add to List
+            </h1>
+            <AddWebsiteForm refreshDatabase={refreshDatabase} />
+          </section>
 
-        <section>
-          <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
-            Remove from List
-          </h1>
-          <RemoveWebsiteList sites={sites} refreshDatabase={refreshDatabase} />
-        </section>
+          <section>
+            <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
+              Remove from List
+            </h1>
+            <RemoveWebsiteList
+              sites={sites}
+              refreshDatabase={refreshDatabase}
+            />
+          </section>
 
-        <section>
-          <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
-            Sound Effects
-          </h1>
-          <Button
-            click={handleSoundToggle}
-            text={!soundEnabled ? "OFF" : "ON"}
-          />
-        </section>
-        <Button click={handleBack} text="BACK" sound="back" active={false} />
-      </div>
+          <section>
+            <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
+              Sound Effects
+            </h1>
+            <Button
+              click={handleSoundToggle}
+              text={!soundEnabled ? "OFF" : "ON"}
+            />
+          </section>
+          <section>
+            <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
+              Background
+            </h1>
+            <BackgroundChange
+              currentBackground={currentBackground}
+              setCurrentBackground={setCurrentBackground}
+            />
+          </section>
+        </div>
+        <div class={"z-1 relative"}>
+          <Button click={handleBack} text="BACK" sound="back" active={false} />
+        </div>
+      </>
     );
   }
 
