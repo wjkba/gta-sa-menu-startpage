@@ -7,8 +7,10 @@ const searchPlaceholder = {
   youtube: "search Youtube",
 };
 
+export type SearchEngines = "google" | "duck" | "youtube";
+
 interface SearchBarProps {
-  search: "google" | "duck" | "youtube";
+  search: SearchEngines;
   setIsSearchBarActive: (bool: boolean) => void;
 }
 export default function SearchBar({

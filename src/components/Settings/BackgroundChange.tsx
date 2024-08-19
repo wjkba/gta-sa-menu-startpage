@@ -17,9 +17,10 @@ export default function BackgroundChange({
   }
 
   return (
-    <div class={"flex flex-wrap gap-4"}>
+    <div class={"flex flex-wrap"}>
       {backgrounds.map((bg, index) => (
         <Button
+          className={"px-4"}
           active={currentBackground === bg}
           click={() => handleChange(bg)}
           text={String(index + 1)}

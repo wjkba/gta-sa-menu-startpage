@@ -4,6 +4,7 @@ import AddWebsiteForm from "./AddWebsiteForm";
 import RemoveWebsiteList from "./RemoveWebsiteList";
 import { type Website } from "../../db";
 import BackgroundChange from "./BackgroundChange";
+import ToggleSearchEngines from "./ToggleSearchEngines";
 
 //TODO: background fix & change background
 //TODO: layout options
@@ -14,6 +15,8 @@ interface SettingsMenuProps {
   sites: Website[];
   currentBackground: string;
   setCurrentBackground: (bgX: string) => void;
+  searchEngines: string[];
+  setSearchEngines: (searchEngines: string[]) => void;
 }
 
 export default function SettingsMenu({
@@ -22,6 +25,8 @@ export default function SettingsMenu({
   sites,
   currentBackground,
   setCurrentBackground,
+  searchEngines,
+  setSearchEngines,
 }: SettingsMenuProps) {
   const [isReady, setIsReady] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(
@@ -60,14 +65,14 @@ export default function SettingsMenu({
           }
         >
           <section>
-            <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
+            <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>
               Add to List
             </h1>
             <AddWebsiteForm refreshDatabase={refreshDatabase} />
           </section>
 
           <section>
-            <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
+            <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>
               Remove from List
             </h1>
             <RemoveWebsiteList
@@ -77,7 +82,17 @@ export default function SettingsMenu({
           </section>
 
           <section>
-            <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
+            <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>
+              Search Engines
+            </h1>
+            <ToggleSearchEngines
+              searchEngines={searchEngines}
+              setSearchEngines={setSearchEngines}
+            />
+          </section>
+
+          <section>
+            <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>
               Sound Effects
             </h1>
             <Button
@@ -86,7 +101,7 @@ export default function SettingsMenu({
             />
           </section>
           <section>
-            <h1 class={"font-beckett text-[#9ec8ed] text-5xl mb-2"}>
+            <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>
               Background
             </h1>
             <BackgroundChange

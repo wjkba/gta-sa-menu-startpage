@@ -2,18 +2,20 @@ import { useEffect, useState } from "preact/hooks";
 import LinkMenu from "./components/LinkMenu";
 import { getDbArray, initDb, Website } from "./db";
 import SettingsMenu from "./components/Settings/SettingsMenu";
-import SearchBar from "./components/SearchBar";
+import SearchBar, { SearchEngines } from "./components/SearchBar";
 
 //TODO: SEARCH ENGINES INPUTS AND SETTINGS TOGGLIN OFF AND ON
 
 export function App() {
   const [currentBackground, setCurrentBackground] = useState("");
+  const [searchEngines, setSearchEngines] = useState<string[]>([]);
   const [websites, setWebsites] = useState<Website[]>([]);
   const [showSettings, setShowSettings] = useState(false);
   const [isSearchBarActive, setIsSearchBarActive] = useState(false);
 
   useEffect(() => {
     loadBackground();
+    loadSearchEngines();
     loadDatabaseWebsites();
   }, []);
 
@@ -24,6 +26,20 @@ export function App() {
     } else {
       setCurrentBackground("bg1");
       localStorage.setItem("background", "bg1");
+    }
+  }
+
+  function loadSearchEngines() {
+    const defaultSearchEngines = ["google", "duck", "youtube"];
+    const localSearchEngines = localStorage.getItem("searchEngines");
+    if (localSearchEngines) {
+      setSearchEngines(JSON.parse(localSearchEngines));
+    } else {
+      setSearchEngines(defaultSearchEngines);
+      localStorage.setItem(
+        "searchEngines",
+        JSON.stringify(defaultSearchEngines)
+      );
     }
   }
 
@@ -52,18 +68,12 @@ export function App() {
               class={" w-full max-w-[600px] lg:pt-[120px] pt-16 z-1 relative"}
             >
               <div class={"md:max-w-[450px]  mb-8"}>
-                <SearchBar
-                  search="google"
-                  setIsSearchBarActive={setIsSearchBarActive}
-                />
-                <SearchBar
-                  search="duck"
-                  setIsSearchBarActive={setIsSearchBarActive}
-                />
-                <SearchBar
-                  search="youtube"
-                  setIsSearchBarActive={setIsSearchBarActive}
-                />
+                {searchEngines.map((engine) => (
+                  <SearchBar
+                    search={engine as SearchEngines}
+                    setIsSearchBarActive={setIsSearchBarActive}
+                  />
+                ))}
               </div>
               <LinkMenu
                 sites={websites}
@@ -79,6 +89,8 @@ export function App() {
                 toggleSettings={toggleSettings}
                 currentBackground={currentBackground}
                 setCurrentBackground={setCurrentBackground}
+                searchEngines={searchEngines}
+                setSearchEngines={setSearchEngines}
               />
             </div>
           )}

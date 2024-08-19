@@ -22,7 +22,7 @@ export default function RemoveWebsiteList({
   return (
     <div class={"grid gap-2"}>
       {sites.map((site) => (
-        <Button click={() => handleDelete(site)} text={"X " + site.name} />
+        <Button click={() => handleDelete(site)} text={"x " + site.name} />
       ))}
     </div>
   );

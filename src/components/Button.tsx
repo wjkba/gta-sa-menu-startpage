@@ -4,6 +4,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   active?: boolean;
   sound?: string;
+  className?: string;
   click?: () => void;
 }
 
@@ -12,6 +13,7 @@ export default function Button({
   active = false,
   click,
   sound = "enter",
+  className,
   ...rest
 }: ButtonProps) {
   function handleClick() {
@@ -37,7 +39,7 @@ export default function Button({
       onClick={handleClick}
       class={`${
         active ? "text-[#a8c3e7]" : "text-[#4b5b6a]"
-      } hover:text-[#a8c3e7] text-left  font-bankGothic text-3xl font-medium`}
+      } ${className} hover:text-[#a8c3e7] text-left  font-bankGothic md:text-3xl text-2xl font-medium`}
     >
       {text}
     </button>
