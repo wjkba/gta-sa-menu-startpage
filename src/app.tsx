@@ -4,8 +4,6 @@ import { getDbArray, initDb, Website } from "./db";
 import SettingsMenu from "./components/Settings/SettingsMenu";
 import SearchBar, { SearchEngines } from "./components/SearchBar";
 
-//TODO: SEARCH ENGINES INPUTS AND SETTINGS TOGGLIN OFF AND ON
-
 export function App() {
   const [currentBackground, setCurrentBackground] = useState("");
   const [searchEngines, setSearchEngines] = useState<string[]>([]);
@@ -58,7 +56,7 @@ export function App() {
       <div class={"relative overflow-hidden w-full max-w-[1600px] h-screen"}>
         <main class={"lg:px-[120px]  px-8 select-none"}>
           <img
-            src={`/images/${currentBackground}.png`}
+            src={`images/${currentBackground}.png`}
             alt={"background"}
             class={"right-0 absolute md:block hidden z-0"}
           />

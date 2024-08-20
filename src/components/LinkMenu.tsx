@@ -68,8 +68,6 @@ export default function LinkMenu({
     };
   }, [activeButton, sites, isSearchBarActive]);
 
-  // TODO: active based on tab, movement keys act as tab
-
   function goUp() {
     setActiveButton((a) => (a > 0 ? a - 1 : sites.length));
   }

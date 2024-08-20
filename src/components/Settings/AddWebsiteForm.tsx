@@ -28,6 +28,8 @@ export default function AddWebsiteForm({
 
     try {
       await db.websites.add({ name, link });
+      if (nameRef.current) nameRef.current.value = "";
+      if (linkRef.current) linkRef.current.value = "";
       setMessage("Website added successfully");
       refreshDatabase();
     } catch (error) {

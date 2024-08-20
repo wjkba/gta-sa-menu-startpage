@@ -6,9 +6,6 @@ import { type Website } from "../../db";
 import BackgroundChange from "./BackgroundChange";
 import ToggleSearchEngines from "./ToggleSearchEngines";
 
-//TODO: background fix & change background
-//TODO: layout options
-
 interface SettingsMenuProps {
   toggleSettings: () => void;
   refreshDatabase: () => void;
