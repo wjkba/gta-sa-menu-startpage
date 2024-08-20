@@ -48,12 +48,12 @@ export default function AddWebsiteForm({
       <div class={"mb-2"}>
         <input
           ref={nameRef}
-          class={`mb-2 text-white outline-none bg-neutral-800 p-2 text-left font-bankGothic text-2xl font-medium w-full`}
+          class={`mb-2 text-white outline-none bg-neutral-800 p-2 text-left md:text-2xl text-lg font-medium w-full`}
           placeholder={"website name"}
         />
         <input
           ref={linkRef}
-          class={`mb-2 text-white outline-none bg-neutral-800 p-2 text-left font-bankGothic text-2xl font-medium w-full`}
+          class={`mb-2 text-white outline-none bg-neutral-800 p-2 text-left md:text-2xl text-lg font-medium w-full`}
           placeholder={"link"}
         />
         {message && <p class={"text-yellow-300"}>{message}</p>}

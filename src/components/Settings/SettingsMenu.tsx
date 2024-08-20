@@ -1,10 +1,10 @@
 import { useEffect, useState } from "preact/hooks";
 import Button from "../Button";
 import AddWebsiteForm from "./AddWebsiteForm";
-import RemoveWebsiteList from "./RemoveWebsiteList";
 import { type Website } from "../../db";
 import BackgroundChange from "./BackgroundChange";
 import ToggleSearchEngines from "./ToggleSearchEngines";
+import ManageWebsitesList from "./ManageWebsitesList";
 
 interface SettingsMenuProps {
   toggleSettings: () => void;
@@ -63,16 +63,16 @@ export default function SettingsMenu({
         >
           <section>
             <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>
-              Add to List
+              Add a New Website
             </h1>
             <AddWebsiteForm refreshDatabase={refreshDatabase} />
           </section>
 
           <section>
             <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>
-              Remove from List
+              Manage Websites
             </h1>
-            <RemoveWebsiteList
+            <ManageWebsitesList
               sites={sites}
               refreshDatabase={refreshDatabase}
             />
