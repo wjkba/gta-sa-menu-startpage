@@ -52,9 +52,11 @@ export function App() {
   }
 
   return (
-    <div class={"bg-black flex justify-center items-center h-screen w-full"}>
-      <div class={"relative overflow-hidden w-full max-w-[1600px] h-screen"}>
-        <main class={"lg:px-[120px]  px-8 select-none"}>
+    <div
+      class={"bg-black flex justify-center items-center min-h-screen w-full"}
+    >
+      <div class={"relative overflow-hidden w-full max-w-[1680] min-h-screen"}>
+        <main class={"lg:px-28 px-8 select-none"}>
           <img
             src={`images/${currentBackground}.png`}
             alt={"background"}
@@ -63,7 +65,7 @@ export function App() {
 
           {!showSettings ? (
             <div
-              class={" w-full max-w-[600px] lg:pt-[120px] pt-16 z-1 relative"}
+              class={" w-full max-w-[600px] lg:pt-[60px] pt-16 z-1 relative"}
             >
               <div class={"md:max-w-[450px]  mb-8"}>
                 {searchEngines.map((engine) => (
@@ -80,7 +82,7 @@ export function App() {
               />
             </div>
           ) : (
-            <div class={"max-w-[664px] w-full lg:pt-[120px] pt-16"}>
+            <div class={"lg:max-w-[40vw] w-full lg:pt-[60px] pt-16"}>
               <SettingsMenu
                 sites={websites}
                 refreshDatabase={loadDatabaseWebsites}

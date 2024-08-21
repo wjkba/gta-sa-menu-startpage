@@ -4,14 +4,9 @@ import { playSoundDelay } from "../utils/audioUtils";
 interface ButtonWebsiteProps {
   children: ReactNode;
   link: string;
-  active: boolean;
 }
 
-export default function ButtonWebsite({
-  children,
-  active,
-  link,
-}: ButtonWebsiteProps) {
+export default function ButtonWebsite({ children, link }: ButtonWebsiteProps) {
   function openWebsite() {
     window.location.href = link;
   }
@@ -27,9 +22,7 @@ export default function ButtonWebsite({
   return (
     <button
       onClick={handleButtonClick}
-      class={`${
-        active ? "text-[#a8c3e7]" : "text-[#4b5b6a]"
-      } hover:text-[#a8c3e7] text-left  font-bankGothic text-3xl font-medium`}
+      class={`focusable outline-none focus:text-[#a8c3e7] text-[#4b5b6a] hover:text-[#a8c3e7] text-left  font-bankGothic text-3xl font-medium`}
     >
       {children}
     </button>

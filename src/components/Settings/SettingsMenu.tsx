@@ -58,7 +58,7 @@ export default function SettingsMenu({
       <>
         <div
           class={
-            "max-h-[65vh] overflow-auto z-1 relative grid gap-12 mb-8 pr-16"
+            "max-h-[80vh] overflow-auto z-1 relative grid gap-12 mb-8 pr-16"
           }
         >
           <section>
@@ -108,7 +108,7 @@ export default function SettingsMenu({
           </section>
         </div>
         <div class={"z-1 relative"}>
-          <Button click={handleBack} text="BACK" sound="back" active={false} />
+          <Button click={handleBack} text="BACK" sound="back" />
         </div>
       </>
     );

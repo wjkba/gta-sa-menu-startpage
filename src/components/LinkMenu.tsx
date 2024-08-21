@@ -15,8 +15,9 @@ export default function LinkMenu({
   toggleSettings,
   isSearchBarActive,
 }: LinkMenuProps) {
-  const [activeButton, setActiveButton] = useState<number>(0);
+  const [_currentIndex, setCurrentIndex] = useState(0);
   const soundEnabled = localStorage.getItem("soundEnabled") !== "false";
+  let focusableElements: NodeList;
 
   useEffect(() => {
     function handleDown() {
@@ -27,16 +28,16 @@ export default function LinkMenu({
       if (soundEnabled) playSound("select");
       goUp();
     }
-    function handleEnter() {
-      if (soundEnabled) playSound("enter");
-      setTimeout(() => {
-        if (activeButton <= sites.length - 1) {
-          window.location.href = sites[activeButton].link;
-        } else {
-          console.log("SETTINGS");
-          toggleSettings();
-        }
-      }, 200);
+    function getFocusableElements() {
+      focusableElements = document.querySelectorAll(".focusable");
+      console.log(focusableElements);
+    }
+
+    getFocusableElements();
+
+    if (focusableElements.length > 0) {
+      (focusableElements[0] as HTMLElement).focus();
+      setCurrentIndex(0);
     }
 
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -54,9 +55,6 @@ export default function LinkMenu({
         case "w":
           handleUp();
           break;
-        case "Enter":
-          handleEnter();
-          break;
         default:
           break;
       }
@@ -66,30 +64,34 @@ export default function LinkMenu({
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [activeButton, sites, isSearchBarActive]);
+  }, [sites, isSearchBarActive]);
 
   function goUp() {
-    setActiveButton((a) => (a > 0 ? a - 1 : sites.length));
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex > 0 ? prevIndex - 1 : sites.length;
+      (focusableElements[newIndex] as HTMLElement).focus();
+      return newIndex;
+    });
   }
 
   function goDown() {
-    setActiveButton((a) => (a + 1 > sites.length ? 0 : a + 1));
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex + 1 <= sites.length ? prevIndex + 1 : 0;
+      (focusableElements[newIndex] as HTMLElement).focus();
+      return newIndex;
+    });
   }
 
   return (
     <>
       <div class={"flex flex-col gap-2 mb-6 "}>
         {sites.map((site, index) => (
-          <ButtonWebsite link={site.link} active={index === activeButton}>
+          <ButtonWebsite key={index} link={site.link}>
             {site.name}
           </ButtonWebsite>
         ))}
       </div>
-      <Button
-        text="SETTINGS"
-        click={toggleSettings}
-        active={sites.length === activeButton}
-      />
+      <Button text="SETTINGS" click={toggleSettings} />
     </>
   );
 }
