@@ -35,7 +35,7 @@ export default function LinkMenu({
 
     getFocusableElements();
 
-    if (focusableElements.length > 0) {
+    if (!isSearchBarActive && focusableElements.length > 0) {
       (focusableElements[0] as HTMLElement).focus();
       setCurrentIndex(0);
     }
@@ -43,7 +43,6 @@ export default function LinkMenu({
     const handleKeyPress = (event: KeyboardEvent) => {
       if (isSearchBarActive) return;
 
-      //TODO: left right column jump
       switch (event.key) {
         case "j":
         case "ArrowDown":
