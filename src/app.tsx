@@ -58,7 +58,7 @@ export function App() {
       <div class={"relative overflow-hidden w-full max-w-[1680] min-h-screen"}>
         <main class={"lg:px-28 px-8 select-none"}>
           <img
-            src={`images/${currentBackground}.png`}
+            src={`images/${currentBackground}.webp`}
             alt={"background"}
             class={"right-0 absolute md:block hidden z-0"}
           />
