@@ -5,6 +5,7 @@ import { type Website } from "../../db";
 import BackgroundChange from "./BackgroundChange";
 import ToggleSearchEngines from "./ToggleSearchEngines";
 import ManageWebsitesList from "./ManageWebsitesList";
+import VolumeSetting from "./VolumeSetting";
 
 interface SettingsMenuProps {
   toggleSettings: () => void;
@@ -92,10 +93,13 @@ export default function SettingsMenu({
             <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>
               Sound Effects
             </h1>
-            <Button
-              click={handleSoundToggle}
-              text={!soundEnabled ? "OFF" : "ON"}
-            />
+            <div className={"grid gap-2"}>
+              <Button
+                click={handleSoundToggle}
+                text={!soundEnabled ? "SFX: OFF" : "SFX: ON"}
+              />
+              <VolumeSetting />
+            </div>
           </section>
           <section>
             <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>

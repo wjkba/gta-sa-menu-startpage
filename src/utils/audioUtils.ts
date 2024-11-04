@@ -4,6 +4,11 @@ import backSFX from "../assets/audio/back.mp3";
 
 export function playSound(soundName: string) {
   let audio;
+  let volume = 1.0;
+  let volumeStorage = localStorage.getItem("volume");
+  if (volumeStorage) volume = parseFloat(volumeStorage);
+  else localStorage.setItem("volume", "1.0");
+
   switch (soundName) {
     case "select":
       audio = new Audio(selectSFX);
@@ -17,7 +22,10 @@ export function playSound(soundName: string) {
     default:
       break;
   }
-  audio?.play();
+  if (audio) {
+    audio.volume = volume;
+    audio.play();
+  }
 }
 
 export function playSoundDelay(
