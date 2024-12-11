@@ -28,7 +28,7 @@ export function App() {
   }
 
   function loadSearchEngines() {
-    const defaultSearchEngines = ["google", "duck", "youtube"];
+    const defaultSearchEngines = ["duck"];
     const localSearchEngines = localStorage.getItem("searchEngines");
     if (localSearchEngines) {
       setSearchEngines(JSON.parse(localSearchEngines));

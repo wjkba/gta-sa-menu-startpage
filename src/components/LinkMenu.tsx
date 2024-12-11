@@ -18,6 +18,7 @@ export default function LinkMenu({
   const [_currentIndex, setCurrentIndex] = useState(0);
   const soundEnabled = localStorage.getItem("soundEnabled") !== "false";
   let focusableElements: NodeList;
+  const layout = "flex flex-col";
 
   useEffect(() => {
     function handleDown() {
@@ -83,7 +84,7 @@ export default function LinkMenu({
 
   return (
     <>
-      <div class={"flex flex-col gap-2 mb-6 "}>
+      <div class={`${layout} gap-2 mb-6 `}>
         {sites.map((site, index) => (
           <ButtonWebsite key={index} link={site.link}>
             {site.name}

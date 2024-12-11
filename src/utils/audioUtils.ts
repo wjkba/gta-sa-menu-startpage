@@ -2,12 +2,15 @@ import selectSFX from "../assets/audio/select.mp3";
 import enterSFX from "../assets/audio/enter.mp3";
 import backSFX from "../assets/audio/back.mp3";
 
-export function playSound(soundName: string) {
+export async function playSound(soundName: string, action?: () => void) {
   let audio;
-  let volume = 1.0;
+  let volume;
   let volumeStorage = localStorage.getItem("volume");
   if (volumeStorage) volume = parseFloat(volumeStorage);
-  else localStorage.setItem("volume", "1.0");
+  else {
+    localStorage.setItem("volume", "1.0");
+    volume = 1.0;
+  }
 
   switch (soundName) {
     case "select":
@@ -24,17 +27,10 @@ export function playSound(soundName: string) {
   }
   if (audio) {
     audio.volume = volume;
-    audio.play();
+    return new Promise((resolve) => {
+      audio.onended = resolve;
+      audio.play();
+      if (action) action();
+    });
   }
-}
-
-export function playSoundDelay(
-  soundName: string,
-  action = () => {},
-  delay = 200
-) {
-  playSound(soundName);
-  setTimeout(() => {
-    action();
-  }, delay);
 }

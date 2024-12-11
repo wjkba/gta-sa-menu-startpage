@@ -1,4 +1,4 @@
-import { playSoundDelay } from "../utils/audioUtils";
+import { playSound } from "../utils/audioUtils";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
@@ -22,13 +22,13 @@ export default function Button({
       if (click.name === "handleSoundToggle") {
         if (soundEnabled) click();
         else {
-          playSoundDelay(sound, click);
+          playSound(sound, click);
         }
         return;
       }
       if (!soundEnabled) click();
       else {
-        playSoundDelay(sound, click);
+        playSound(sound, click);
       }
     }
   }

@@ -103,6 +103,12 @@ export default function ButtonWebsiteManage({
             type={"button"}
             text="DELETE"
           />
+          <Button
+            sound="back"
+            type={"button"}
+            click={() => setIsEditing(false)}
+            text="CANCEL"
+          />
         </div>
       </form>
     );
