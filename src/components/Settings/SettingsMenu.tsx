@@ -6,6 +6,7 @@ import BackgroundChange from "./BackgroundChange";
 import ToggleSearchEngines from "./ToggleSearchEngines";
 import ManageWebsitesList from "./ManageWebsitesList";
 import VolumeSetting from "./VolumeSetting";
+import LayoutChange from "./LayoutChange";
 
 interface SettingsMenuProps {
   toggleSettings: () => void;
@@ -81,6 +82,13 @@ export default function SettingsMenu({
 
           <section>
             <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>
+              Websites Layout
+            </h1>
+            <LayoutChange />
+          </section>
+
+          <section>
+            <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>
               Search Engines
             </h1>
             <ToggleSearchEngines
@@ -101,6 +109,7 @@ export default function SettingsMenu({
               <VolumeSetting />
             </div>
           </section>
+
           <section>
             <h1 class={"font-beckett text-[#9ec8ed] md:text-5xl text-4xl mb-2"}>
               Background
@@ -111,7 +120,7 @@ export default function SettingsMenu({
             />
           </section>
         </div>
-        <div class={"z-1 relative"}>
+        <div class={"bg-black fixed bottom-4 pt-6 pb-4 w-full"}>
           <Button click={handleBack} text="BACK" sound="back" />
         </div>
       </>

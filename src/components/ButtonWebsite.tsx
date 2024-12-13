@@ -22,7 +22,7 @@ export default function ButtonWebsite({ children, link }: ButtonWebsiteProps) {
   return (
     <button
       onClick={handleButtonClick}
-      class={`focusable outline-none focus:text-[#a8c3e7] text-[#4b5b6a] hover:text-[#a8c3e7] text-left  font-bankGothic text-3xl font-medium`}
+      class={`text-ellipsis focusable outline-none focus:text-[#a8c3e7] text-[#4b5b6a] hover:text-[#a8c3e7] text-left  font-bankGothic text-3xl font-medium`}
     >
       {children}
     </button>

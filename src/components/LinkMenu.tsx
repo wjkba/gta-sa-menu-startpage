@@ -16,9 +16,19 @@ export default function LinkMenu({
   isSearchBarActive,
 }: LinkMenuProps) {
   const [_currentIndex, setCurrentIndex] = useState(0);
+  const [layout, setLayout] = useState(" ");
   const soundEnabled = localStorage.getItem("soundEnabled") !== "false";
   let focusableElements: NodeList;
-  const layout = "flex flex-col";
+
+  useEffect(() => {
+    const localLayout = localStorage.getItem("layout");
+    if (localLayout === "oneColumn") setLayout(" ");
+    if (localLayout === "twoColumns")
+      setLayout("lg:grid lg:grid-cols-2 lg:overflow-hidden ");
+    else {
+      localStorage.setItem("layout", "oneColumn");
+    }
+  }, []);
 
   useEffect(() => {
     function handleDown() {
@@ -68,7 +78,17 @@ export default function LinkMenu({
 
   function goUp() {
     setCurrentIndex((prevIndex) => {
-      const newIndex = prevIndex > 0 ? prevIndex - 1 : sites.length;
+      let newIndex;
+      if (localStorage.getItem("layout") === "twoColumns") {
+        if (prevIndex - 2 >= 0) newIndex = prevIndex - 2;
+        else {
+          if (prevIndex % 2 === 0)
+            newIndex =
+              sites.length % 2 === 0 ? sites.length - 2 : sites.length - 1;
+          else newIndex = sites.length - 2;
+        }
+      } else newIndex = prevIndex > 0 ? prevIndex - 1 : sites.length - 1;
+
       (focusableElements[newIndex] as HTMLElement).focus();
       return newIndex;
     });
@@ -76,7 +96,13 @@ export default function LinkMenu({
 
   function goDown() {
     setCurrentIndex((prevIndex) => {
-      const newIndex = prevIndex + 1 <= sites.length ? prevIndex + 1 : 0;
+      let newIndex;
+      if (localStorage.getItem("layout") === "twoColumns") {
+        if (prevIndex + 2 < sites.length) newIndex = prevIndex + 2;
+        else if (prevIndex % 2 === 0) newIndex = 1;
+        else newIndex = 0;
+      } else newIndex = prevIndex + 1 < sites.length ? prevIndex + 1 : 0;
+
       (focusableElements[newIndex] as HTMLElement).focus();
       return newIndex;
     });
@@ -84,14 +110,16 @@ export default function LinkMenu({
 
   return (
     <>
-      <div class={`${layout} gap-2 mb-6 `}>
+      <div class={`${layout} flex flex-col gap-2 max-h-[70vh] overflow-auto`}>
         {sites.map((site, index) => (
           <ButtonWebsite key={index} link={site.link}>
             {site.name}
           </ButtonWebsite>
         ))}
       </div>
-      <Button text="SETTINGS" click={toggleSettings} />
+      <div class={"bg-black fixed bottom-4 pt-6 pb-4 w-full"}>
+        <Button text="SETTINGS" click={toggleSettings} />
+      </div>
     </>
   );
 }

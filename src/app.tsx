@@ -65,7 +65,7 @@ export function App() {
 
           {!showSettings ? (
             <div
-              class={" w-full max-w-[600px] lg:pt-[60px] pt-16 z-1 relative"}
+              class={"w-full lg:max-w-[40vw] lg:pt-[60px] pt-16 z-1 relative"}
             >
               <div class={"md:max-w-[450px]  mb-8"}>
                 {searchEngines.map((engine) => (
