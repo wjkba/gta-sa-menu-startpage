@@ -20,5 +20,8 @@ You can also build the page yourself and run it locally. Feel free to customize 
 - Move up and down in menu using jk, ws, or the arrow keys
 - Integrated search engines
 
+## Contributing
+Issues and pull requests are welcome!
+
 ## Acknowledgments
-All credit for the original design goes to Rockstar.
+All credit for the original design goes to Rockstar
